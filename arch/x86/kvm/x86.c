@@ -2313,6 +2313,78 @@ static int kvm_vcpu_ioctl_x86_set_debugregs(struct kvm_vcpu *vcpu,
 	return 0;
 }
 
+
+static void kvm_vcpu_ioctl_x86_get_xsave(struct kvm_vcpu *vcpu,
+					 struct kvm_xsave *guest_xsave)
+{
+	if (cpu_has_xsave)
+		memcpy(guest_xsave->region,
+			&vcpu->arch.guest_fpu.state->xsave,
+			xstate_size);
+	else {
+		memcpy(guest_xsave->region,
+			&vcpu->arch.guest_fpu.state->fxsave,
+			sizeof(struct i387_fxsave_struct));
+		*(u64 *)&guest_xsave->region[XSAVE_HDR_OFFSET / sizeof(u32)] =
+			XSTATE_FPSSE;
+	}
+}
+
+static int kvm_vcpu_ioctl_x86_set_xsave(struct kvm_vcpu *vcpu,
+					struct kvm_xsave *guest_xsave)
+{
+	u64 xstate_bv =
+		*(u64 *)&guest_xsave->region[XSAVE_HDR_OFFSET / sizeof(u32)];
+
+	if (cpu_has_xsave)
+		memcpy(&vcpu->arch.guest_fpu.state->xsave,
+			guest_xsave->region, xstate_size);
+	else {
+		if (xstate_bv & ~XSTATE_FPSSE)
+			return -EINVAL;
+		memcpy(&vcpu->arch.guest_fpu.state->fxsave,
+			guest_xsave->region, sizeof(struct i387_fxsave_struct));
+	}
+	return 0;
+}
+
+static void kvm_vcpu_ioctl_x86_get_xcrs(struct kvm_vcpu *vcpu,
+					struct kvm_xcrs *guest_xcrs)
+{
+	if (!cpu_has_xsave) {
+		guest_xcrs->nr_xcrs = 0;
+		return;
+	}
+
+	guest_xcrs->nr_xcrs = 1;
+	guest_xcrs->flags = 0;
+	guest_xcrs->xcrs[0].xcr = XCR_XFEATURE_ENABLED_MASK;
+	guest_xcrs->xcrs[0].value = vcpu->arch.xcr0;
+}
+
+static int kvm_vcpu_ioctl_x86_set_xcrs(struct kvm_vcpu *vcpu,
+				       struct kvm_xcrs *guest_xcrs)
+{
+	int i, r = 0;
+
+	if (!cpu_has_xsave)
+		return -EINVAL;
+
+	if (guest_xcrs->nr_xcrs > KVM_MAX_XCRS || guest_xcrs->flags)
+		return -EINVAL;
+
+	for (i = 0; i < guest_xcrs->nr_xcrs; i++)
+		/* Only support XCR0 currently */
+		if (guest_xcrs->xcrs[0].xcr == XCR_XFEATURE_ENABLED_MASK) {
+			r = __kvm_set_xcr(vcpu, XCR_XFEATURE_ENABLED_MASK,
+				guest_xcrs->xcrs[0].value);
+			break;
+		}
+	if (r)
+		r = -EINVAL;
+	return r;
+}
+
 long kvm_arch_vcpu_ioctl(struct file *filp,
 			 unsigned int ioctl, unsigned long arg)
 {
