@@ -584,7 +584,7 @@ static struct bcm_freq_tbl bcm215xx_cpu0_freq_tbl[] = {
 //	FTBL_INIT(BCM_CORE_CLK_MEDC / 1000, 1240000),
 	FTBL_INIT(BCM_CORECLK_TURBO / 1000, 1300000),
 //	FTBL_INIT(BCM_CORECLK_TURBOA / 1000, 1320000),
-	FTBL_INIT(BCM_CORECLK_TURBOB / 1000, 1320000),
+//	FTBL_INIT(BCM_CORECLK_TURBOB / 1000, 1320000),
 };
 /* BCM21553 CPU info */
 static struct bcm_cpu_info bcm215xx_cpu_info[] = {
