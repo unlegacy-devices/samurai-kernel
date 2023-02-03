@@ -619,7 +619,7 @@ struct platform_device bcm21553_cpufreq_drv = {
  *********************************************************************/
 
 static struct bcm21553_cpufreq_gov_plat bcm21553_cpufreq_gov_plat = {
-	.freq_turbob = BCM_CORECLK_TURBOB,
+//	.freq_turbob = BCM_CORECLK_TURBOB,
 //	.freq_turboa = BCM_CORECLK_TURBOA,
 	.freq_turbo = BCM_CORECLK_TURBO,
 	.freq_medb = BCM_CORE_CLK_MEDB,
