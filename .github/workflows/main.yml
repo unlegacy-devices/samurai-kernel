@@ -14,7 +14,7 @@ jobs:
     - name: Getting Toolchain
       run: |
         sudo apt-get install lib32z1
-        sudo git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6 /root/toolchain
+        sudo git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6 /opt/toolchain
     - name: Building Kernel
       run: |
         make -j2 cyanogenmod_totoro_defconfig
