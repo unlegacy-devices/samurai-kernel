@@ -70,6 +70,8 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/init.h>
+#include <linux/writeback.h>
+#include <linux/truncate.h>
 #include <linux/fs.h>
 #include <linux/proc_fs.h>
 #include <linux/smp_lock.h>
@@ -475,9 +477,6 @@ static const struct super_operations yaffs_super_ops = {
 	.put_super = yaffs_put_super,
 #ifdef YAFFS_HAS_EVICT_INODE
 	.evict_inode = yaffs_evict_inode,
-#else
-	.delete_inode = yaffs_delete_inode,
-	.clear_inode = yaffs_clear_inode,
 #endif
 	.sync_fs = yaffs_sync_fs,
 	.write_super = yaffs_write_super,
