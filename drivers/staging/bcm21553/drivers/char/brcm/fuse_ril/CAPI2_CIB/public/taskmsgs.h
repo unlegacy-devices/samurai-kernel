@@ -6406,8 +6406,10 @@ typedef enum
 	api is CAPI2_CcApi_GetCNAPName 
 	**/
 	MSG_CC_GETCNAPNAME_REQ  = MSG_GRP_CAPI2_GEN_0 + 0x4B4,	///<Payload type {::CAPI2_CcApi_GetCNAPName_Req_t}
-	 /** 	payload is ::CcCnapName_t 
-	**/	MSG_CC_GETCNAPNAME_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x4B5,	///<Payload type {::CcCnapName_t}
+	 /** 
+	payload is ::CcCnapName_t 
+	**/
+	MSG_CC_GETCNAPNAME_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x4B5,	///<Payload type {::CcCnapName_t}
 	 /** 
 	api is CAPI2_SYSPARM_GetHSUPASupported 
 	**/
@@ -6736,7 +6738,8 @@ typedef enum
 	payload is ::Result_t 
 	**/
 	MSG_MS_SET_RAT_BAND_EX_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x6C5,
-	 /** 	api is CAPI2_NetRegApi_SetTZUpdateMode 
+	 /** 
+	api is CAPI2_NetRegApi_SetTZUpdateMode 
 	**/
 	MSG_TIMEZONE_SET_UPDATE_MODE_REQ  = MSG_GRP_CAPI2_GEN_0 + 0x6CA,	///<Payload type {::CAPI2_NetRegApi_SetTZUpdateMode_Req_t}
 	 /** 
@@ -6751,20 +6754,34 @@ typedef enum
 	payload is ::TimeZoneUpdateMode_t 
 	**/
 	MSG_TIMEZONE_GET_UPDATE_MODE_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x6CD,	///<Payload type {::TimeZoneUpdateMode_t}
-	 /** 	api is CAPI2_SimApi_GetAdData 	**/	MSG_SIM_AD_DATA_REQ  = MSG_GRP_CAPI2_GEN_0 + 0x6D6,	 /** 	payload is void 	**/	MSG_SIM_AD_DATA_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x6D7,	///<Payload type {void}        /** 	api is CAPI2_SimApi_GetCurrentSimVoltage 
+	 /** 
+	api is CAPI2_SimApi_GetAdData 
+	**/
+	MSG_SIM_AD_DATA_REQ  = MSG_GRP_CAPI2_GEN_0 + 0x6D6,
+	 /** 
+	payload is void 
+	**/
+	MSG_SIM_AD_DATA_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x6D7,	///<Payload type {void}
+        /** 
+	api is CAPI2_SimApi_GetCurrentSimVoltage 
 	**/
 	MSG_SIM_GET_CURRENT_SIM_VOLTAGE_REQ  = MSG_GRP_CAPI2_GEN_0 + 0x6D8,
 	 /** 
 	payload is ::SimVoltage_t 
 	**/
-	MSG_SIM_GET_CURRENT_SIM_VOLTAGE_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x6D9,	///<Payload type {::SimVoltage_t}	/** 	api is CAPI2_MS_SetSupportedRATandBand 	**/	MSG_MS_SET_RAT_AND_BAND_REQ  = MSG_GRP_CAPI2_GEN_0 + 0x6DA,	///<Payload type {::CAPI2_MS_SetSupportedRATandBand_Req_t}	 /** 	payload is ::Result_t 	**/	MSG_MS_SET_RAT_AND_BAND_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x6DB,
+	MSG_SIM_GET_CURRENT_SIM_VOLTAGE_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x6D9,	///<Payload type {::SimVoltage_t}
+	/** 
+	api is CAPI2_MS_SetSupportedRATandBand 
+	**/
+	MSG_MS_SET_RAT_AND_BAND_REQ  = MSG_GRP_CAPI2_GEN_0 + 0x6DA,	///<Payload type {::CAPI2_MS_SetSupportedRATandBand_Req_t}
+	 /** 
+	payload is ::Result_t 
+	**/
+	MSG_MS_SET_RAT_AND_BAND_RSP  = MSG_GRP_CAPI2_GEN_0 + 0x6DB,
 	//MSG_GEN_REQ_END = 0x48FF
 
 /*********  _CAPI2_CODE_GEN_END_  ************/
 
-#ifndef TEMP_DEFINE_SYSRPC_TASKMSG
-#include "sys_gen_mids.i"	//Remove when TEMP_DEFINE_SYSRPC_TASKMSG is defined in all components
-#endif
 
 	MSG_GEN_REQ_END = 0x48FF,
 
